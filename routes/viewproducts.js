@@ -24,7 +24,8 @@ router.get('/', function(req, res, next) {
     database : 'project1'
   });
 
-var queryString="SELECT * FROM products WHERE productId LIKE '%"+productId+"' AND title LIKE '%"+ keyword +"' AND groups LIKE '%"+category+"';";
+//var queryString="SELECT * FROM products WHERE productId LIKE '%"+productId+"' AND title LIKE '%"+ keyword +"' AND groups LIKE '%"+category+"';";
+  var queryString="SELECT * FROM products p INNER JOIN productcategory pc ON p.productID=pc.productID INNER JOIN categories c WHERE p.productID="+productId+" OR c.category='"+category+"' OR p.title='"+keyword+"' GROUP BY p.productID";
   console.log(queryString);
   	connection.query(queryString,function(err, rows) {
     	 res.json({product_list:rows});
