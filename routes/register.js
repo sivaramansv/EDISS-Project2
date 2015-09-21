@@ -15,19 +15,31 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-if(req.query.fName==""||req.query.lName==""||req.query.address==""||req.query.city==""||req.query.state=="")
-{
-  res.json({message:"There was a problem with the registration"});
-}
-if(req.query.email==""||req.query.user==""||req.query.password==""||req.query.zip.length<5)
-{
-  res.json({message:"There was a problem with the registration"});  
-}
-if(req.query.state.length < 2 || req.query.state.length > 2 )
-{
-  res.json({message:"There was a problem with the registration"});   
-}
+var fName=req.query.fName;
+var lName=req.query.lName;
+var address=req.query.address;
+var city=req.query.city;
+var state=req.query.state;
+var zip=req.query.zip;
+var email=req.query.email;
+var user=req.query.uName;
+var password=req.query.pWord;
 
+if(typeof fName==='undefined'||typeof lName==='undefined'||typeof address==='undefined'||typeof city==='undefined')
+{
+  res.json({"message":"There was a problem with the registration"}); 
+}
+if(typeof state==='undefined'||typeof email==='undefined'||typeof user==='undefined'||typeof password==='undefined')
+{
+  res.json({"message":"There was a problem with the registration"});  
+}  
+
+if(state.length!=2 || zip.length!=5)
+{
+  res.json({"message":"There was a problem with the registration"}); 
+}
+else
+{
 var data = {
   fName:req.query.fName,
   lName:req.query.lName,
@@ -42,11 +54,17 @@ var data = {
  };
  
 connection.query("INSERT INTO login set ? ",data,function(err, rows, fields) {
-    if (err) res.json({message:"There was a problem with the registration"});
-    else res.json({message:"Your account has been registered"});  
+    if (err) 
+    {
+      res.json({"message":"There was a problem with the registration"});
+    }
+    else
+    {
+      res.json({"message":"Your account has been registered"});  
+    }
 });
- 
-connection.end();
+}
+//connection.end();
 
 });
 

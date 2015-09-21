@@ -93,12 +93,12 @@ var connection = mysql.createConnection({
     password : 'medida',
     database : 'project1'
   });
-
+  
 connection.connect();
  
 connection.query(finalString,function(err, rows, fields) {
     if (err) res.json({message:"There was a problem with the registration"});
-    else res.json({message:"Your information has been updated"});  
+    res.json({message:"Your information has been updated"});  
 });
 connection.end();
 }

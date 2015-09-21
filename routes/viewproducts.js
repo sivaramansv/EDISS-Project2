@@ -8,14 +8,9 @@ var mysql = require('mysql');
 
 router.get('/', function(req, res, next) {
   
-  console.log("Entered");
-
   var productId=req.query.productId;
-  console.log(productId);
   var category=req.query.category;
-  console.log(category);
   var keyword=req.query.keyword;
-  console.log(keyword);
 
   var connection = mysql.createConnection({
     host     : 'localhost',
