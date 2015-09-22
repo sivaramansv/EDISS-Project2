@@ -10,8 +10,8 @@ router.get('/', function(req, res, next) {
   
   var sessionID=req.sessionID;
   var inputSessionID=req.query.sessionID;
-  if(sessionID===inputSessionID)
-  {
+  //if(sessionID===inputSessionID)
+  //{
  	if(req.session.role=="admin")
  	{
  
@@ -52,11 +52,11 @@ router.get('/', function(req, res, next) {
  	  });
   
   }
- } 
+ /*} 
  else
  {
  	res.json({message:'Admin should login'});
- }
+ }*/
 });
 
 module.exports = router;
